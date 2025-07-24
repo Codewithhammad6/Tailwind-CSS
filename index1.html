@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Animated Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card-3d {
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+    .card-3d:hover {
+      transform: rotateY(15deg) rotateX(10deg);
+    }
+    .card-inner {
+      transform: translateZ(50px);
+    }
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 to-purple-900 min-h-screen flex items-center justify-center p-4">
+  <div class="card-3d perspective-1000 w-full max-w-md">
+    <div class="card-inner bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl shadow-black/50 border border-white/20">
+      <div class="floating mb-8 text-center">
+        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-r from-pink-500 to-violet-500 shadow-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </div>
+      </div>
+      
+      <h1 class="text-3xl font-bold text-white text-center mb-2">3D Magic</h1>
+      <p class="text-white/80 text-center mb-6">Hover over this card to see 3D effect</p>
+      
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-white/10 rounded-lg p-3 text-center text-white transform transition hover:scale-110 hover:bg-white/20">
+          <div class="text-2xl mb-1">✨</div>
+          <div class="text-xs">Effect</div>
+        </div>
+        <div class="bg-white/10 rounded-lg p-3 text-center text-white transform transition hover:scale-110 hover:bg-white/20">
+          <div class="text-2xl mb-1">🎨</div>
+          <div class="text-xs">Design</div>
+        </div>
+        <div class="bg-white/10 rounded-lg p-3 text-center text-white transform transition hover:scale-110 hover:bg-white/20">
+          <div class="text-2xl mb-1">🚀</div>
+          <div class="text-xs">Launch</div>
+        </div>
+      </div>
+      
+      <button class="w-full py-3 px-4 bg-gradient-to-r from-pink-500 to-violet-500 text-white rounded-lg font-medium shadow-lg transform transition hover:scale-105 hover:shadow-xl">
+        Click Me
+      </button>
+      
+      <div class="mt-6 text-center text-white/60 text-sm">
+        <p>Tilt your cursor for 3D effect</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Enhanced 3D tilt effect
+    const card = document.querySelector('.card-3d');
+    
+    card.addEventListener('mousemove', (e) => {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 15;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 15;
+      card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+    
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.1s ease';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.5s ease';
+      card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  </script>
+</body>
+</html>
